@@ -22,7 +22,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+###Available commands:
+
+```ruby
+  new(opts) - Creates a new Connector. (opts to be defined)
+  get(hash)
+  post(hash, payload)
+  delete(hash)
+```
+###Hash structure:
+==== Attributes
+** hash[:endpoint] - Url endpoint ex. /product/get (no need to specify the version)
+** hash[:headers]     - Request arguments, (add headers key for extra headers options) ex. hash[:headers] = { 'content-type' => 'xml' }
+** hash[params]    - Request parameters. ex. hash[:params] = { 'param1' => 'XXXXXX' }
+
+###Payload
+JSON-formatted hash.
+
 
 ## Development
 

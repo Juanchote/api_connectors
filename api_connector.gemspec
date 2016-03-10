@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jm.rodulfo.salcedo@gmail.com"]
 
   spec.summary       = "API connectors"
-  spec.description   = "API Connector main class for wrapping ResClient functionality"
+  spec.description   = "API Connector main class for wrapping RestClient functionality"
   spec.homepage      = "https://github.com/Juanchote/api_connectors"
   spec.license       = "MIT"
 
