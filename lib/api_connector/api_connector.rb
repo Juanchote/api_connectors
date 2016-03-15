@@ -95,7 +95,7 @@ module Connectors #:nodoc:
     end
 
     def header headers={}
-      common_headers.merge({
+      (common_headers || {}).merge({
         'X-Client-Id' => @x_person_id,
         'Content-Type' => @content_type || 'application/json',
         'Charset' => @charset || 'utf-8'
@@ -117,7 +117,7 @@ module Connectors #:nodoc:
     end
 
     def common_headers
-      { 'X-Client-Id' => api_client_id }.merge(
+      { 'X-Client-Id' => @api_client_id }.merge(
         {"Authorization" => "Basic #{@api_headers_token}"}
       ) if @api_headers_token
     end
