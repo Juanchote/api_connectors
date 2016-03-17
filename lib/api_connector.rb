@@ -3,6 +3,7 @@ require 'api_connector/api_connector'
 require 'active_support/core_ext/hash/keys'
 require 'logger'
 require 'rest-client'
+require "addressable/uri"
 
 module ApiConnector
   def self.new(options={})

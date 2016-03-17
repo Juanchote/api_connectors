@@ -1,9 +1,10 @@
 PATH
   remote: .
   specs:
-    api_connector (0.1.1)
+    api_connector (0.1.4.1)
       activesupport (~> 4.2.4)
-      rest-client
+      addressable (~> 2.3.8)
+      rest-client (~> 1.8.0)
 
 GEM
   remote: https://rubygems.org/
@@ -14,6 +15,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.3.8)
     diff-lcs (1.2.5)
     domain_name (0.5.20160309)
       unf (>= 0.0.5, < 1.0.0)

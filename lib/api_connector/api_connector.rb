@@ -4,9 +4,9 @@ module Connectors #:nodoc:
   # === Heading
   # This class has all the common logic from <b>api connectors</b>.
   class ApiConnector
-    attr_reader :logger, :api_client_id, :api_domain, :api_mall_id,
-      :api_domain_format, :api_headers_token, :connection_protocol,
-      :headers, :code, :cookies, :cookie_jar, :request, :body
+    attr_reader :logger, :api_client_id, :api_domain, :api_domain_format,
+      :api_headers_token, :connection_protocol, :headers, :code, :cookies,
+      :cookie_jar, :request, :body
 
     def initialize(options = {}) #:notnew:
       options.symbolize_keys!
@@ -60,19 +60,16 @@ module Connectors #:nodoc:
 
       url = (method == :get || method == :delete) ? url(endpoint,params) : url(endpoint)
 
-      begin
-        RestClient::Request.execute(method: method,
-                                url: url,
-                                headers: header(args[:headers]),
-                                payload: params || {}
-                               ) do |response, request, result|
-                                 status = response.code == 200 ? :debug : :error
-                                 #print(status, request, response.body)
-                                 parse(response, endpoint)
-                               end
-      rescue RestClient::RequestTimeout
-        { status: '400', message: "RestClient timeout" }
-      end
+      RestClient::Request.execute(method: method,
+                              url: url,
+                              headers: header(args[:headers]),
+                              payload: params || {}
+                             ) do |response, request, result|
+                               #status = response.code == 200 ? :debug : :error
+                               #print(status, request, response.body)
+                               parse(response, endpoint)
+                             end
+
     end
 
     def parse(response, endpoint = nil)
@@ -123,9 +120,9 @@ module Connectors #:nodoc:
     end
 
     def url_constructor endpoint, hash
-      url = "#{@connection_protocol}://#{format(@api_domain)}/#{format(@prefix)}" << (@version ? "/#{@version}" : "") << "/#{format(endpoint)}"
+      url = "#{@connection_protocol}://#{format(@api_domain)}/#{format(@prefix)}" << "/#{format(endpoint)}"
       url << ("?#{parametrize(hash)}") unless hash.empty?
-      url
+      Addressable::URI.parse(url).normalize.to_str
     end
 
     def parametrize hash
