@@ -120,7 +120,7 @@ module Connectors #:nodoc:
     end
 
     def url_constructor endpoint, hash
-      url = "#{@connection_protocol}://#{format(@api_domain)}/#{format(@prefix)}" << "/#{format(endpoint)}"
+      url = "#{@connection_protocol}://#{format(@api_domain)}" << "/#{format(endpoint)}"
       url << ("?#{parametrize(hash)}") unless hash.empty?
       Addressable::URI.parse(url).normalize.to_str
     end
